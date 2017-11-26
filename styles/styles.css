@@ -1,0 +1,107 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	font-family: "Aleo";
+}
+
+header {
+	background-color: #3A3B3F;
+	text-align: center;
+	color: white;
+	padding: 5px 0;
+}
+
+main {
+	display: flex;
+	flex-direction: row;
+}
+
+.sources,
+.news {
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.sources {
+	flex: 1 1 0px;
+}
+
+.sources h3 {
+	padding-left: 15px;
+	margin-bottom: 5px;
+}
+
+.sources-list {
+	list-style-type: none;
+}
+
+.source-item {
+	padding: 2px 0;
+}
+
+.source-item a {
+	cursor: pointer;
+}
+
+.news {
+	flex: 4 1 0px;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	background-color: #2D2D2E;
+}
+
+.news-item {
+	flex: 1 0 200px;
+	margin: 10px;
+
+	padding: 5px;
+	border-radius: 3px;
+	background-color: white;
+}
+
+.news-item_pic {
+	height: 200px;
+}
+.news-item_link {
+	font-family: "Aleo Bold";
+	text-decoration: none;
+	color: inherit;
+}
+.news-item_date {
+	font-size: smaller;
+}
+
+.news-item_description {
+	font-family: "Aleo Light";
+	font-size: smaller;
+}
+
+.selected {
+	background-color: tomato;
+}
+
+
+/* mobile */
+@media screen and (max-width: 768px) {
+	main {
+		flex-direction: column;
+	}
+
+	.sources {
+		flex: 1 0 30vh;
+	}
+
+	.news {
+		flex: 2 0 70vh;
+	}
+};

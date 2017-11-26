@@ -1,0 +1,14 @@
+@font-face {
+	font-family: "Aleo";
+	src: url(fonts/aleo-regular-webfont.woff);
+}
+
+@font-face {
+	font-family: "Aleo Bold";
+	src: url(fonts/aleo-bold-webfont.woff);
+}
+
+@font-face {
+	font-family: "Aleo Light";
+	src: url(fonts/aleo-light-webfont.woff);
+}
