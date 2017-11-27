@@ -17,6 +17,12 @@ header {
 	padding: 5px 0;
 }
 
+header a {
+	color: white;
+	font-family: "Aleo Bold";
+	text-decoration: none;
+}
+
 main {
 	display: flex;
 	flex-direction: row;
