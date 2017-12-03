@@ -1,0 +1,24 @@
+{
+  "name": "mushyak.github.io",
+  "version": "1.0.0",
+  "description": "FrontCamp 2017",
+  "main": "main.js",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "babel scripts -d dist --presets env"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mushyak/mushyak.github.io.git"
+  },
+  "author": "Irina Kouznetsova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mushyak/mushyak.github.io/issues"
+  },
+  "homepage": "https://github.com/mushyak/mushyak.github.io#readme"
+}
