@@ -3,7 +3,7 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root) {
-
+  if (!root) root = window;
   // Store setTimeout reference so promise-polyfill will be unaffected by
   // other code modifying setTimeout (like sinon.useFakeTimers())
   var setTimeoutFunc = setTimeout;
@@ -134,7 +134,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return this.then(null, onRejected);
   };
 
-  Promise.prototype.then = function (onFulfilled, onRejected) {
+  Promise.prototype['then'] = function (onFulfilled, onRejected) {
     var prom = new this.constructor(noop);
 
     handle(this, new Handler(onFulfilled, onRejected, prom));
