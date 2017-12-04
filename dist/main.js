@@ -27,7 +27,7 @@ var NewsApp = function () {
 				var sourceContainer = document.getElementsByClassName("sources-list")[0];
 
 				data.forEach(function (item, index) {
-					sourceContainer.append(_this.createSourceItem(item, index));
+					sourceContainer.appendChild(_this.createSourceItem(item, index));
 				});
 
 				var _data = _slicedToArray(data, 1),
@@ -76,7 +76,7 @@ var NewsApp = function () {
 
 				data.forEach(function (item) {
 					if (item.title && item.url && item.publishedAt) {
-						newsContainer.append(_this2.createNewsItem(item));
+						newsContainer.appendChild(_this2.createNewsItem(item));
 					}
 				});
 			});

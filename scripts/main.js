@@ -15,7 +15,7 @@ class NewsApp {
 			let sourceContainer = document.getElementsByClassName("sources-list")[0];
 
 			data.forEach((item, index) => {
-				sourceContainer.append(this.createSourceItem(item, index));
+				sourceContainer.appendChild(this.createSourceItem(item, index));
 			});
 
 			let [{id: firstSelection}] = data;
@@ -54,7 +54,7 @@ class NewsApp {
 
 			data.forEach((item) => {
 				if (item.title && item.url && item.publishedAt) {
-					newsContainer.append(this.createNewsItem(item));
+					newsContainer.appendChild(this.createNewsItem(item));
 				}
 			});
 		});
