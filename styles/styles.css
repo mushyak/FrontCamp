@@ -84,6 +84,8 @@ main {
 	padding: 5px;
 	border-radius: 3px;
 	background-color: white;
+
+	overflow: hidden;
 }
 
 .news-item_pic {
