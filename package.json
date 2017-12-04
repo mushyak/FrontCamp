@@ -11,8 +11,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "buildLibs": "babel node_modules/whatwg-fetch -d dist/libs --presets env",
+    "buildFetch": "babel node_modules/whatwg-fetch -d dist/libs --presets env",
+    "buildPromise": "babel node_modules/promise-polyfill -d dist/libs/promise --presets env",
     "compile": "babel scripts -d dist --presets env",
+    "buildLibs": "npm run buildPromise | npm run buildFetch",
     "build": "npm run buildLibs | npm run compile"
   },
   "repository": {

@@ -1,3 +1,7 @@
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 (function (root) {
 
   // Store setTimeout reference so promise-polyfill will be unaffected by
@@ -5,7 +9,7 @@
   var setTimeoutFunc = setTimeout;
 
   function noop() {}
-  
+
   // Polyfill for Function.prototype.bind
   function bind(fn, thisArg) {
     return function () {
@@ -54,7 +58,7 @@
     try {
       // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
       if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.');
-      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+      if (newValue && ((typeof newValue === 'undefined' ? 'undefined' : _typeof(newValue)) === 'object' || typeof newValue === 'function')) {
         var then = newValue.then;
         if (newValue instanceof Promise) {
           self._state = 3;
@@ -82,7 +86,7 @@
 
   function finale(self) {
     if (self._state === 2 && self._deferreds.length === 0) {
-      Promise._immediateFn(function() {
+      Promise._immediateFn(function () {
         if (!self._handled) {
           Promise._unhandledRejectionFn(self._value);
         }
@@ -131,7 +135,7 @@
   };
 
   Promise.prototype.then = function (onFulfilled, onRejected) {
-    var prom = new (this.constructor)(noop);
+    var prom = new this.constructor(noop);
 
     handle(this, new Handler(onFulfilled, onRejected, prom));
     return prom;
@@ -146,7 +150,7 @@
 
       function res(i, val) {
         try {
-          if (val && (typeof val === 'object' || typeof val === 'function')) {
+          if (val && ((typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' || typeof val === 'function')) {
             var then = val.then;
             if (typeof then === 'function') {
               then.call(val, function (val) {
@@ -171,7 +175,7 @@
   };
 
   Promise.resolve = function (value) {
-    if (value && typeof value === 'object' && value.constructor === Promise) {
+    if (value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && value.constructor === Promise) {
       return value;
     }
 
@@ -195,10 +199,11 @@
   };
 
   // Use polyfill for setImmediate for performance gains
-  Promise._immediateFn = (typeof setImmediate === 'function' && function (fn) { setImmediate(fn); }) ||
-    function (fn) {
-      setTimeoutFunc(fn, 0);
-    };
+  Promise._immediateFn = typeof setImmediate === 'function' && function (fn) {
+    setImmediate(fn);
+  } || function (fn) {
+    setTimeoutFunc(fn, 0);
+  };
 
   Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
     if (typeof console !== 'undefined' && console) {
@@ -223,11 +228,10 @@
   Promise._setUnhandledRejectionFn = function _setUnhandledRejectionFn(fn) {
     Promise._unhandledRejectionFn = fn;
   };
-  
+
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = Promise;
   } else if (root && !root.Promise) {
     root.Promise = Promise;
   }
-
-})(this);
+})(undefined);
