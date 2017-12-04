@@ -5,7 +5,9 @@
   "main": "main.js",
   "dependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "promise-polyfill": "6.1.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {},
   "scripts": {
