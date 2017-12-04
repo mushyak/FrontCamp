@@ -11,7 +11,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build": "babel scripts -d dist --presets env"
+    "buildLibs": "babel node_modules/whatwg-fetch -d dist/libs --presets env",
+    "compile": "babel scripts -d dist --presets env",
+    "build": "npm run buildLibs | npm run compile"
   },
   "repository": {
     "type": "git",
