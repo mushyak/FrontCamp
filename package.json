@@ -4,16 +4,17 @@
   "description": "FrontCamp 2017",
   "main": "main.js",
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.34",
-    "@babel/preset-env": "^7.0.0-beta.34",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^8.0.0-beta.0",
-    "babel-preset-env": "^1.6.1",
     "promise-polyfill": "6.1.0",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.7",
+    "style-loader": "^0.19.0",
     "webpack": "^3.10.0"
   },
   "scripts": {

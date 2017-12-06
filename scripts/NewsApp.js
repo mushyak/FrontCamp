@@ -1,4 +1,4 @@
-import NewsService from "./NewsService";
+import NewsService from "./NewsService.js";
 
 export default class NewsApp {
 	constructor() {
