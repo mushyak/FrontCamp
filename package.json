@@ -4,18 +4,25 @@
   "description": "FrontCamp 2017",
   "main": "main.js",
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.34",
+    "@babel/preset-env": "^7.0.0-beta.34",
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^8.0.0-beta.0",
     "babel-preset-env": "^1.6.1",
     "promise-polyfill": "6.1.0",
     "whatwg-fetch": "^2.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  },
   "scripts": {
     "buildFetch": "babel node_modules/whatwg-fetch -d dist/libs --presets env",
     "buildPromise": "babel node_modules/promise-polyfill -d dist/libs/promise --presets env",
     "compile": "babel scripts -d dist --presets env",
     "buildLibs": "npm run buildPromise | npm run buildFetch",
-    "build": "npm run buildLibs | npm run compile"
+    "build": "npm run buildLibs | npm run compile",
+    "start": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
