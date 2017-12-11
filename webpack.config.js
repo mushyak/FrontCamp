@@ -7,7 +7,8 @@ module.exports = {
 		js: "./src/scripts/main.js",
 		css: "./src/styles/styles.css",
 		fetch: "./node_modules/whatwg-fetch/fetch.js",
-		promise: "./node_modules/promise-polyfill/promise.js"
+		promise: "./node_modules/promise-polyfill/promise.js",
+		json: "./src/customLoader/sample.json"
 	},
 
 	output: {
@@ -31,6 +32,10 @@ module.exports = {
 				test: /\.css$/,
 				include: [path.resolve(__dirname, "src/styles")],
 				use: ['style-loader', 'css-loader']
+			},
+			{
+				test: /\.json$/,
+				use: ['json-loader', 'custom-loader']
 			}
 		]
 	},
@@ -39,5 +44,11 @@ module.exports = {
 		contentBase: [path.join(__dirname, "dist"), path.join(__dirname, "src")],
 		compress: true,
 		port: 9000
+	},
+
+	resolveLoader: {
+		alias: {
+			'custom-loader': path.resolve(__dirname, 'src/customLoader/customLoader.js')
+		}
 	}
 };
