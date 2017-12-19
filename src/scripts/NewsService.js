@@ -1,7 +1,14 @@
-export default class NewsService {
+let instance = null;
+const apiKey = "355304c455aa4e2c937207c833db0e4f";
+
+export default class NewsService {	// Structural Pattern: Facade
 	constructor() {
-		const apiKey = "355304c455aa4e2c937207c833db0e4f";
+		if (instance) {
+			return instance;	// Creational Pattern: Singleton
+		}
+
 		this.apiKey = apiKey;
+		instance = this;
 	}
 
 	getSources() {

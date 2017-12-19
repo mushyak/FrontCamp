@@ -29,9 +29,12 @@
     "webpack-merge": "^4.1.1"
   },
   "scripts": {
+    "build:libs": "babel node_modules/whatwg-fetch -d dist/libs --presets env",
+    "compile": "babel src/scripts -d dist --presets env",
+    "build:babel": "npm run build:libs | npm run compile",
     "build": "webpack --config webpack.config.js",
     "serve": "webpack-dev-server",
-    "build:dev": "webpack-dev-server --open --config webpack.dev.js",
+    "build:dev": "npm run build | webpack-dev-server --open --config webpack.dev.js",
     "build:prod": "webpack --config webpack.prod.js"
   },
   "repository": {

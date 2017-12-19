@@ -1,47 +1,31 @@
 import NewsService from "./NewsService.js";
+import { NewsItemTemplate } from "./NewsItemTemplate.js";
 
 export default class NewsApp {
 	constructor() {
 		this.sevice = new NewsService();
+		this.newsItemTemplate = Object.assign({}, NewsItemTemplate); // Creational Pattern: Prototype
+
 		this.loadSources();
+		this.selectedSource = "";
 	}
 
+	// Behavioral Pattern: Command - public methods
 	loadSources() {
 		this.sevice.getSources().then((data) => {
 			const sourceContainer = document.getElementsByClassName("sources-list")[0];
 
 			data.forEach((item, index) => {
-				sourceContainer.appendChild(this.createSourceItem(item, index));
+				sourceContainer.appendChild(this._createSourceItem(item, index));
 			});
 
 			let [{id: firstSelection}] = data;
-			this.loadNews(firstSelection);
+			this.selectedSource = firstSelection;
 		});
 	}
 
-	selectSource(e) {
-		if (e.target.attributes["data-code"]) {
-			this.clearSourceSelection();
-			this.clearNewsContainer();
-
-			const sourceId = e.target.attributes["data-code"].value;
-			e.currentTarget.classList.add("selected");
-			this.loadNews(sourceId);
-		}
-	}
-
-	clearNewsContainer() {
-		const newsContainer = document.getElementsByClassName("news")[0];
-		while (newsContainer.firstChild) {
-			newsContainer.removeChild(newsContainer.firstChild);
-		}
-	}
-
-	clearSourceSelection() {
-		const selected = document.getElementsByClassName("selected")[0];
-		if (selected) {
-			selected.classList.remove("selected");
-		}
+	loadNewsByClick() {
+		this.loadNews(this.selectedSource);
 	}
 
 	loadNews(source = "abc-news") {
@@ -50,33 +34,56 @@ export default class NewsApp {
 
 			data.forEach((item) => {
 				if (item.title && item.url && item.publishedAt) {
-					newsContainer.appendChild(this.createNewsItem(item));
+					newsContainer.appendChild(this._createNewsItem(item));
 				}
 			});
 		});
 	}
 
-	createNewsItem(item) {
+	// pseudo private methods
+
+	_selectSource(e) {
+		if (e.target.attributes["data-code"]) {
+			this._clearSourceSelection();
+			this._clearNewsContainer();
+
+			const sourceId = e.target.attributes["data-code"].value;
+			e.currentTarget.classList.add("selected");
+			this.selectedSource = sourceId;
+		}
+	}
+
+	_clearNewsContainer() {
+		const newsContainer = document.getElementsByClassName("news")[0];
+		while (newsContainer.firstChild) {
+			newsContainer.removeChild(newsContainer.firstChild);
+		}
+	}
+
+	_clearSourceSelection() {
+		const selected = document.getElementsByClassName("selected")[0];
+		if (selected) {
+			selected.classList.remove("selected");
+		}
+	}
+
+	_createNewsItem(item) {
 		const container = document.createElement("div");
 		container.classList.add("news-item");
-		let content = "";
+		let content = this.newsItemTemplate.createBasicTemplate(item);
+
 		if (item.urlToImage) {
-			content = `<img class="news-item_pic" src="${item.urlToImage}">`
+			content = this.newsItemTemplate.addImage(item, content);	// Structural Pattern: Decorator
 		}
-		content += `<p>
-						<a href="${item.url}" class="news-item_link">${item.title}</a>
-					</p>
-					<p>
-					<span class="news-item_date">${new Date(item.publishedAt).toLocaleDateString()}</span>`;
 		if (item.description) {
-			content += `<span class="news-item_description"> - ${item.description}</span>`;
+			content = this.newsItemTemplate.addDescription(item, content);
 		}
-		content += "</p>";
+
 		container.innerHTML = content;
 		return container;
 	}
 
-	createSourceItem(item, index) {
+	_createSourceItem(item, index) {
 		const li = document.createElement("li");
 		li.classList.add("source-item");
 		if (index == 0) {
@@ -84,7 +91,7 @@ export default class NewsApp {
 		}
 
 		li.innerHTML = `<a data-code="${item.id}">${item.name}</a>`;
-		li.addEventListener("click", this.selectSource.bind(this));
+		li.addEventListener("click", this._selectSource.bind(this));
 		return li;
 	}
 }
